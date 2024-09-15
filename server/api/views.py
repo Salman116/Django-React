@@ -27,3 +27,18 @@ def createBook(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PUT', 'DELETE'])
+def updatedeleteBook(request, pk):
+    qs = Book.objects.filter(pk=pk).first()
+    if not qs:
+        return Response("Doesnot exists", status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'PUT':
+        serializer = BookSerializer(qs, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        qs.delete()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response()
