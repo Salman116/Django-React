@@ -13,7 +13,7 @@ function App() {
   }, []);
   const fetchBooks = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/apis/books')
+        const response = await fetch('https://salman116.pythonanywhere.com/apis/books')
         const data = await response.json()
         setBooks(data)
     } catch (err) {
@@ -24,7 +24,7 @@ function App() {
   const createBooks = async () => {
     try{
       console.log(title, " ", releaseYear)
-      const response = await fetch('http://127.0.0.1:8000/apis/create-book', {
+      const response = await fetch('https://salman116.pythonanywhere.com/apis/create-book', {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -43,7 +43,7 @@ function App() {
   };
   const updateBook = async (pk, release_year) => {
     try{
-      const response = await fetch(`http://127.0.0.1:8000/apis/book/${pk}`, {
+      const response = await fetch(`https://salman116.pythonanywhere.com/apis/book/${pk}`, {
         method: 'PUT',
         headers:{
           "Content-Type": 'application/json; charset=UTF-8'
@@ -68,7 +68,7 @@ function App() {
   };
   const deleteBook = async (pk, release_year) => {
     try{
-      const response = await fetch(`http://127.0.0.1:8000/apis/book/${pk}`, {
+      const response = await fetch(`https://salman116.pythonanywhere.com/apis/book/${pk}`, {
         method: 'Delete',
         headers:{
           "Content-Type": 'application/json; charset=UTF-8'
