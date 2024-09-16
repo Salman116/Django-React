@@ -40,5 +40,5 @@ def updatedeleteBook(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         qs.delete()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response("Deleted", status=status.HTTP_200_OK)
     return Response()

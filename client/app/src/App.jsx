@@ -5,6 +5,7 @@ import './App.css'
 function App() {
   const [books, setBooks] = useState([])
   const [title, setTitle] = useState("");
+  const [newtitle, setnewTitle] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
 
   useEffect ( () => {
@@ -37,7 +38,45 @@ function App() {
       console.log(data)
       setBooks( (prev) => [...prev, data])
     } catch (err){
-
+      console.log(err)
+    }
+  };
+  const updateBook = async (pk, release_year) => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/apis/book/${pk}`, {
+        method: 'PUT',
+        headers:{
+          "Content-Type": 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+          title: newtitle,
+          release_year: release_year,
+        })
+      })
+      const data = await response.json()
+      setBooks( (prev) => prev.map((book) => {
+        if (book.id === pk){
+          return data;
+        }
+        else{
+          return book;
+        }
+      }) )
+    } catch (err){
+      console.log("Update API", err)
+    }
+  };
+  const deleteBook = async (pk, release_year) => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/apis/book/${pk}`, {
+        method: 'Delete',
+        headers:{
+          "Content-Type": 'application/json; charset=UTF-8'
+        },
+      })
+      setBooks( (prev) => prev.filter((book)=>book.id ===!pk));
+    } catch (err){
+      console.log("Delete API", err)
     }
   };
   return (
@@ -58,6 +97,9 @@ function App() {
           <div>
             <p> Title: {book.title} </p>
             <p> Release Year: {book.release_year} </p>
+            <input type='text' placeholder='Enter new Title' onChange={(e) => setnewTitle(e.target.value)}></input>
+            <button onClick={() => updateBook(book.id, book.release_year)}>Update</button>
+            <button onClick={() => deleteBook(book.id, book.release_year)}>Delete</button>
           </div>
         )
 
