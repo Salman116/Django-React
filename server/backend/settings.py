@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#m8+15kxng*6jnk5)^dz&4)-o6=xv1fbpq-l$8anhz+*zg6qqh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['salman116.pythonanywhere.com','https://django-react-lemon.vercel.app/']
 
 
 # Application definition
