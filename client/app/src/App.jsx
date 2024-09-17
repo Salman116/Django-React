@@ -74,7 +74,7 @@ function App() {
           "Content-Type": 'application/json; charset=UTF-8'
         },
       })
-      setBooks( (prev) => prev.filter((book)=>book.id ===!pk));
+      setBooks( (prev) => prev.filter((book)=>book.id !== pk));
     } catch (err){
       console.log("Delete API", err)
     }
